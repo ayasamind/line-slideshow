@@ -1,0 +1,11 @@
+{
+  "name": "connect",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.278.0",
+    "@aws-sdk/client-dynamodb": "^3.278.0",
+    "@aws-sdk/lib-dynamodb": "^3.278.0"
+  }
+}
