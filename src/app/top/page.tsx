@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -45,6 +47,14 @@ const SwipeableTextMobileStepper = () => {
     setActiveStep(step);
   };
 
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
   return (
     <FullScreen handle={handle}>
         <Box sx={{ maxWidth: 'auto', flexGrow: 1 }}>
@@ -56,6 +66,7 @@ const SwipeableTextMobileStepper = () => {
         >
             {images.map((step, index) => (
             <div key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
                 <Box
                     component="img"
                     sx={{
@@ -68,6 +79,7 @@ const SwipeableTextMobileStepper = () => {
                     src={step.imgPath}
                     alt={step.label}
                 />
+              ) : null}
             </div>
             ))}
         </AutoPlaySwipeableViews>
@@ -75,8 +87,30 @@ const SwipeableTextMobileStepper = () => {
             steps={maxSteps}
             position="static"
             activeStep={activeStep}
-            backButton=""
-            nextButton=""
+            nextButton={
+              <Button
+                size="small"
+                onClick={handleNext}
+                disabled={activeStep === maxSteps - 1}
+              >
+                Next
+                {theme.direction === 'rtl' ? (
+                  <KeyboardArrowLeft />
+                ) : (
+                  <KeyboardArrowRight />
+                )}
+              </Button>
+            }
+            backButton={
+              <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                {theme.direction === 'rtl' ? (
+                  <KeyboardArrowRight />
+                ) : (
+                  <KeyboardArrowLeft />
+                )}
+                Back
+              </Button>
+            }
         />
         <Button
             size="small"
