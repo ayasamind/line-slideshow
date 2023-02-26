@@ -199,6 +199,13 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@material-ui/types@^4.0.0":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-4.1.1.tgz#b65e002d926089970a3271213a3ad7a21b17f02b"
+  integrity sha512-AN+GZNXytX9yxGi0JOfxHrRTbhFybjUJ05rnsBVjcB+16e466Z0Xe5IxawuOayVZgTBNDxmPKo5j4V6OnMtaSQ==
+  dependencies:
+    "@types/react" "*"
+
 "@mui/base@5.0.0-alpha.118":
   version "5.0.0-alpha.118"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.118.tgz#335e7496ea605c9b7bda4164efb2da3f09f36dfc"
@@ -455,6 +462,22 @@
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-17.0.3.tgz#2d855ba575f2fc8d17ef9861f084acc4b90a137a"
   integrity sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-swipeable-views-utils@^0.13.4":
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@types/react-swipeable-views-utils/-/react-swipeable-views-utils-0.13.4.tgz#2a48da267b48467887b146178673f4020dec5b1e"
+  integrity sha512-v0nDk6mMIPAu/kaEnqQpDz2Z7O8ewqy2in7xwobcAAkUKKsdw3MSWFW1BkQ+dPgTrBnj/KXUzx3ZIS6UYviwyA==
+  dependencies:
+    "@material-ui/types" "^4.0.0"
+    "@types/react" "*"
+    "@types/react-swipeable-views" "*"
+
+"@types/react-swipeable-views@*", "@types/react-swipeable-views@^0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@types/react-swipeable-views/-/react-swipeable-views-0.13.1.tgz#381c8513deef5426623aa851033ff4f4831ae15c"
+  integrity sha512-Nuvywkv9CkwcUgItOCBszkc/pc8YSdiKV5E1AzOJ/p32Db50LgwhJFi5b1ANPgyWxB0Q5yn69aMURHyGi3MLyg==
   dependencies:
     "@types/react" "*"
 
@@ -2157,6 +2180,37 @@ react-is@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-swipeable-view-core@^0.14.0, react-swipeable-view-core@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/react-swipeable-view-core/-/react-swipeable-view-core-0.14.2.tgz#24f1f1608fbac8d7b5c95510638ca15dcff3a9cc"
+  integrity sha512-/CgdGvHnWpsQLtjXiX5HOKxVpBqEIElwMFbFjdS0EFCzdtMjOp1r/Q1UyZD7ixH/y6AXvjHiN85UJy5ScgEiug==
+  dependencies:
+    "@babel/runtime" "7.0.0"
+    warning "^4.0.1"
+
+react-swipeable-view-utils@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/react-swipeable-view-utils/-/react-swipeable-view-utils-0.14.2.tgz#116a084fb188353b2985a0f72084505331792b88"
+  integrity sha512-2ywe/C57bwRgN7aBvMjxBDUOCahkb51xhxm8o7FV+aMx9aH4LYkGrdnrS/VK37KR9ckMffQxf+afzfImyepFrg==
+  dependencies:
+    "@babel/runtime" "7.0.0"
+    keycode "^2.1.7"
+    prop-types "^15.6.0"
+    react-event-listener "^0.6.0"
+    react-swipeable-view-core "^0.14.0"
+    shallow-equal "^1.2.1"
+
+react-swipeable-view@^0.14.2:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/react-swipeable-view/-/react-swipeable-view-0.14.2.tgz#0a8e13aaa0e713934c65cd1cbce5df8bfeffc964"
+  integrity sha512-/TcwgPQJpEs1PBDnlaJbL+etHlyGueP4VapApxV7gUmKWtJ1z2cu7YAPAW0o62jjMR5+DvM0NYkKVSjZi/aBNg==
+  dependencies:
+    "@babel/runtime" "7.0.0"
+    prop-types "^15.5.4"
+    react-swipeable-view-core "^0.14.2"
+    react-swipeable-view-utils "^0.14.2"
+    warning "^4.0.1"
 
 react-swipeable-views-core@^0.14.0:
   version "0.14.0"

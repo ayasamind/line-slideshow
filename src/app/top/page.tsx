@@ -10,18 +10,20 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const images = [];
+let images: Array<any> = [];
 
-const getImageFromS3 = async (apiUrl) => {
+const getImageFromS3 = async (apiUrl: string) => {
   const res = await fetch(apiUrl);
   const data = await res.json()
   return data;
 }
 
 const SwipeableTextMobileStepper = () => {
+  const s3Url: string = process.env.NEXT_PUBLIC_S3_URL as string;
+  const apiGatewayUrl: string = process.env.NEXT_PUBLIC_APIGATEWAY_URL as string;
   const [s3images, setImageData] = useState([])
   useEffect(() => {
-    getImageFromS3(process.env.NEXT_PUBLIC_APIGATEWAY_URL).then(data => {
+    getImageFromS3(apiGatewayUrl).then(data => {
       setImageData(data)
     });
   }, [])
@@ -30,7 +32,7 @@ const SwipeableTextMobileStepper = () => {
     s3images.forEach(image => {
       images.push({
         label: image["key"],
-        imgPath: process.env.NEXT_PUBLIC_S3_URL+image["key"],
+        imgPath: s3Url+image["key"],
       })
     });
   }
@@ -73,6 +75,8 @@ const SwipeableTextMobileStepper = () => {
             steps={maxSteps}
             position="static"
             activeStep={activeStep}
+            backButton=""
+            nextButton=""
         />
         <Button
             size="small"
