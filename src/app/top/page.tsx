@@ -12,8 +12,8 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [];
 
-const getImageFromS3 = async () => {
-  const res = await fetch("https://jbbgdzaqvfrioaqbdyyavwthfq0gcfof.lambda-url.ap-northeast-1.on.aws/");
+const getImageFromS3 = async (apiUrl) => {
+  const res = await fetch(apiUrl);
   const data = await res.json()
   return data;
 }
@@ -21,19 +21,16 @@ const getImageFromS3 = async () => {
 const SwipeableTextMobileStepper = () => {
   const [s3images, setImageData] = useState([])
   useEffect(() => {
-    getImageFromS3().then(data => {
+    getImageFromS3(process.env.NEXT_PUBLIC_APIGATEWAY_URL).then(data => {
       setImageData(data)
-      console.log();
     });
   }, [])
-
-  console.log(s3images);
 
   if (images.length === 0) {
     s3images.forEach(image => {
       images.push({
         label: image["key"],
-        imgPath: "https://images-from-line.s3.ap-northeast-1.amazonaws.com/"+image["key"],
+        imgPath: process.env.NEXT_PUBLIC_S3_URL+image["key"],
       })
     });
   }
