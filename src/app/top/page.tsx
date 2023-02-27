@@ -13,17 +13,12 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 let images: Array<any> = [];
-let message: string = "待機中";
 
 const getImageFromS3 = async (apiUrl: string) => {
   const res = await fetch(apiUrl);
   const data = await res.json()
   return data;
 }
-
-const socket = new WebSocket(
-  "wss://hdkt3jtq6c.execute-api.ap-northeast-1.amazonaws.com/dev"
-);
 
 const SwipeableTextMobileStepper = () => {
   useEffect(() => {
@@ -56,7 +51,11 @@ const SwipeableTextMobileStepper = () => {
     });
   }
 
+  const [message, setMessage] = useState("")
   useEffect(() => {
+    const socket = new WebSocket(
+      "wss://hdkt3jtq6c.execute-api.ap-northeast-1.amazonaws.com/dev"
+    );
     socket.onopen = (event) => {
       // クライアント接続時
       console.log("onopen", event);
@@ -65,7 +64,7 @@ const SwipeableTextMobileStepper = () => {
     socket.onmessage = (event) => {
       // サーバーからのメッセージ受信時
       console.log("onmessgae", event);
-      message = event.data;
+      setMessage(event.data);
       new Notification(message);
     };
 
