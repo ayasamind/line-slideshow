@@ -13,6 +13,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 let images: Array<any> = [];
+let message: string = "待機中";
 
 const getImageFromS3 = async (apiUrl: string) => {
   const res = await fetch(apiUrl);
@@ -20,7 +21,23 @@ const getImageFromS3 = async (apiUrl: string) => {
   return data;
 }
 
+const socket = new WebSocket(
+  "wss://hdkt3jtq6c.execute-api.ap-northeast-1.amazonaws.com/dev"
+);
+
 const SwipeableTextMobileStepper = () => {
+  useEffect(() => {
+    if ("Notification" in window) {
+      // 通知が許可されていたら早期リターン
+      const permission = Notification.permission;
+      if (permission === "denied" || permission === "granted") {
+        return;
+      }
+      // 通知の許可を求める
+      Notification.requestPermission().then(() => new Notification("テスト"));
+    }
+  }, []);
+
   const s3Url: string = process.env.NEXT_PUBLIC_S3_URL as string;
   const apiGatewayUrl: string = process.env.NEXT_PUBLIC_APIGATEWAY_URL as string;
   const [s3images, setImageData] = useState([])
@@ -38,6 +55,25 @@ const SwipeableTextMobileStepper = () => {
       })
     });
   }
+
+  useEffect(() => {
+    socket.onopen = (event) => {
+      // クライアント接続時
+      console.log("onopen", event);
+    };
+
+    socket.onmessage = (event) => {
+      // サーバーからのメッセージ受信時
+      console.log("onmessgae", event);
+      message = event.data;
+      new Notification(message);
+    };
+
+    socket.onclose = (event) => {
+      // クライアント切断時
+      console.log("onclose", event);
+    };
+  });
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -57,6 +93,7 @@ const SwipeableTextMobileStepper = () => {
 
   return (
     <FullScreen handle={handle}>
+        <p>{ message }</p>
         <Box sx={{ maxWidth: 'auto', flexGrow: 1 }}>
         <AutoPlaySwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
