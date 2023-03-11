@@ -47,7 +47,7 @@ const PhotoList = () => {
             </ListSubheader>
         </ImageListItem>
         {images.map((item) => (
-            <Zoom>
+            <Zoom key={item.imgPath}>
               <ImageListItem key={item.imgPath}>
                 <img
                     src={`${item.imgPath}?w=248&fit=crop&auto=format`}
