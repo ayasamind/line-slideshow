@@ -44,10 +44,13 @@ const SwipeableTextMobileStepper = () => {
 
   if (images.length === 0) {
     s3images.forEach(image => {
-      images.push({
-        label: image["key"],
-        imgPath: s3Url+image["key"],
-      })
+      let imageKey: string = image["key"];
+      if (imageKey.endsWith("photo")) {
+        images.push({
+          label: image["key"],
+          imgPath: s3Url+image["key"],
+        })
+      }
     });
   }
 
