@@ -17,6 +17,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 let images: Array<any> = [];
 let profiles: {[id: string]: {label: string, imgPath: string}} = {};
+let message: string = '';
 const apiGatewayUrl: string = process.env.NEXT_PUBLIC_APIGATEWAY_URL as string;
 const websocketApiGatewayUrl: string = process.env.NEXT_PUBLIC_WEBSOCKET_APIGATEWAY_URL as string;
 
@@ -74,6 +75,10 @@ const SwipeableTextMobileStepper = () => {
       }
     })
   }
+
+  const reload = () => window.location.reload();
+
+  const [message, setMessage] = useState('');
   useEffect(() => {
     const socket = new WebSocket(websocketApiGatewayUrl);
     socket.onopen = (event) => {
@@ -91,6 +96,8 @@ const SwipeableTextMobileStepper = () => {
     socket.onclose = (event) => {
       // クライアント切断時
       console.log("onclose", event);
+      setMessage('WebSocket接続が切断されました')
+      setTimeout(reload, 2000)
     };
   }, []);
 
@@ -167,7 +174,7 @@ const SwipeableTextMobileStepper = () => {
                 onClick={handleNext}
                 disabled={activeStep === maxSteps - 1}
               >
-                Next
+                Next {message}
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowLeft />
                 ) : (
