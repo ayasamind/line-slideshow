@@ -11,16 +11,6 @@ const getImageFromS3 = async (apiUrl: string) => {
   return data;
 }
 
-function srcset(image: string, size: number, rows = 1, cols = 1) {
-    return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  }
-  
-
 const PhotoList = () => {
   const s3Url: string = process.env.NEXT_PUBLIC_S3_URL as string;
   const apiGatewayUrl: string = process.env.NEXT_PUBLIC_APIGATEWAY_URL as string;
@@ -42,15 +32,16 @@ const PhotoList = () => {
 
   return (
     <ImageList
-        sx={{ width: 'auto', height: 'auto' }}
+        sx={{ margin: '2px' }}
         variant="masonry"
-        cols={5}
-        gap={10}
+        cols={2}
+        gap={5}
         >
         {images.map((item) => (
-            <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+            <ImageListItem key={item.img}>
             <img
-                {...srcset(item.imgPath, 121, item.rows, item.cols)}
+                src={`${item.imgPath}?w=248&fit=crop&auto=format`}
+                srcSet={`${item.imgPath}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.label}
                 loading="lazy"
             />
