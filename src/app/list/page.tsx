@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Zoom from 'react-medium-image-zoom'
 
 let images: Array<any> = [];
+let profiles: Array<any> = [];
 
 const getImageFromS3 = async (apiUrl: string) => {
   const res = await fetch(apiUrl);
@@ -27,12 +28,24 @@ const PhotoList = () => {
 
   if (images.length === 0) {
     s3images.forEach(image => {
-      images.push({
-        label: image["key"],
-        imgPath: s3Url+image["key"],
-      })
+      // console.log(image)
+      if (image["key"].endsWith("photo")) {
+        images.push({
+          label: image["key"],
+          imgPath: s3Url+image["key"],
+        })
+      } else if (image["key"].endsWith("profile")) {
+        let key = image["key"].split('/');
+        let author = key[1].split('_')[0];
+        profiles.push({
+          label: author,
+          imgPath: s3Url+image["key"],
+        })
+      }
     });
   }
+
+  // console.log(profiles)
 
   return (
     <ImageList
@@ -46,7 +59,7 @@ const PhotoList = () => {
                 {`0319披露宴フォト`}
             </ListSubheader>
         </ImageListItem>
-        {images.map((item) => (
+        {images.map((item, index) => (
             <Zoom key={item.imgPath}>
               <ImageListItem key={item.imgPath}>
                 <img
@@ -56,13 +69,15 @@ const PhotoList = () => {
                     loading="lazy"
                 />
                 <ImageListItemBar
-                    title={`test`}
+                    subtitle={profiles[index].label}
+                    actionPosition='left'
                     actionIcon={
                     <IconButton
                         sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                         aria-label={`info about ${`test`}`}
                     >
-                  </IconButton>
+                      <img width="30px" style={{ borderRadius: '50%'}} src={ profiles[index].imgPath } ></img>
+                    </IconButton>
                 }
               />
               </ImageListItem>
