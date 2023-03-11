@@ -123,7 +123,7 @@ const SwipeableTextMobileStepper = () => {
             index={activeStep}
             onChangeIndex={handleStepChange}
             enableMouseEvents
-            interval={5000}
+            interval={7500}
         >
           {images.map((step, index) => (
             <div key={step.label}>
