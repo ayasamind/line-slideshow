@@ -68,12 +68,7 @@ const SwipeableTextMobileStepper = () => {
 
   const output = () => {
     images.some((image, index) =>  {
-      console.log(image)
-      console.log(index)
-      console.log(profiles[image.label])
       if (profiles[image.label]) {
-        console.log(index)
-        console.log()
         handleStepChange(index);
         return true;
       }
