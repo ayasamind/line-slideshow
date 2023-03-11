@@ -8,7 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import Zoom from 'react-medium-image-zoom'
 
 let images: Array<any> = [];
-let profiles: Array<any> = [];
+// let profiles: { property: string; };
+const profiles: {[id: string]: {label: string, imgPath: string}} = {};
+// let profiles: Array<any> = [];
 
 const getImageFromS3 = async (apiUrl: string) => {
   const res = await fetch(apiUrl);
@@ -29,22 +31,23 @@ const PhotoList = () => {
   if (images.length === 0) {
     s3images.forEach(image => {
       let imageKey: string = image["key"];
+      let key = imageKey.split('/');
+      let author = key[1].split('_')[0];
+      let messageId = key[0];
       if (imageKey.endsWith("photo")) {
         images.push({
-          label: image["key"],
+          label: messageId,
           imgPath: s3Url+image["key"],
         })
       } else if (imageKey.endsWith("profile")) {
-        let key = imageKey.split('/');
-        let author = key[1].split('_')[0];
-        profiles.push({
+        profiles[messageId] = {
           label: author,
           imgPath: s3Url+image["key"],
-        })
+        }
       }
     });
   }
-  
+
   return (
     <ImageList
         sx={{ margin: '2px', minHeight: 300 }}
@@ -67,14 +70,14 @@ const PhotoList = () => {
                     loading="lazy"
                 />
                 <ImageListItemBar
-                    subtitle={profiles[index].label}
+                    subtitle={profiles[item.label].label}
                     actionPosition='left'
                     actionIcon={
                     <IconButton
                         sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                         aria-label={`info about ${`test`}`}
                     >
-                      <img width="30px" style={{ borderRadius: '50%'}} src={ profiles[index].imgPath } ></img>
+                      <img width="30px" style={{ borderRadius: '50%'}} src={ profiles[item.label].imgPath } ></img>
                     </IconButton>
                 }
               />
