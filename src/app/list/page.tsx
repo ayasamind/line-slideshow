@@ -5,6 +5,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
+import Zoom from 'react-medium-image-zoom'
 
 let images: Array<any> = [];
 
@@ -46,24 +47,26 @@ const PhotoList = () => {
             </ListSubheader>
         </ImageListItem>
         {images.map((item) => (
-            <ImageListItem key={item.imgPath}>
-            <img
-                src={`${item.imgPath}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.imgPath}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt={item.label}
-                loading="lazy"
-            />
-            <ImageListItemBar
-                title={`test`}
-                actionIcon={
-                <IconButton
-                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                    aria-label={`info about ${`test`}`}
-                >
-              </IconButton>
-            }
-          />
-            </ImageListItem>
+            <Zoom>
+              <ImageListItem key={item.imgPath}>
+                <img
+                    src={`${item.imgPath}?w=248&fit=crop&auto=format`}
+                    srcSet={`${item.imgPath}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.label}
+                    loading="lazy"
+                />
+                <ImageListItemBar
+                    title={`test`}
+                    actionIcon={
+                    <IconButton
+                        sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                        aria-label={`info about ${`test`}`}
+                    >
+                  </IconButton>
+                }
+              />
+              </ImageListItem>
+            </Zoom>
         ))}
     </ImageList>
   );
