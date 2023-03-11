@@ -8,9 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Zoom from 'react-medium-image-zoom'
 
 let images: Array<any> = [];
-// let profiles: { property: string; };
-const profiles: {[id: string]: {label: string, imgPath: string}} = {};
-// let profiles: Array<any> = [];
+let profiles: {[id: string]: {label: string, imgPath: string}} = {};
 
 const getImageFromS3 = async (apiUrl: string) => {
   const res = await fetch(apiUrl);

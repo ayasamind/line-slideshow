@@ -1,7 +1,7 @@
 import * as AWS from "aws-sdk";
 
 export async function handler(event: any): Promise<any> {
-  console.log(`sendMessage ${JSON.stringify(event)}`);
+  const objectKey = decodeURI(event['Records'][0]['s3']['object']['key']).replace( /\+/g, ' ');
 
   const endpoint = process.env.ENDPOINT
 
@@ -15,7 +15,7 @@ export async function handler(event: any): Promise<any> {
 
   for (const data of result.Items ?? []) {
     const params = {
-      Data: "画像がアップロードされました",
+      Data: objectKey,
       ConnectionId: data.connectionId,
     };
 
