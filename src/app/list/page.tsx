@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
 
 let images: Array<any> = [];
 
@@ -32,19 +35,34 @@ const PhotoList = () => {
 
   return (
     <ImageList
-        sx={{ margin: '2px' }}
+        sx={{ margin: '2px', minHeight: 300 }}
         variant="masonry"
         cols={2}
         gap={5}
         >
+        <ImageListItem key="Subheader">
+            <ListSubheader component="div">
+                {`0319披露宴フォト`}
+            </ListSubheader>
+        </ImageListItem>
         {images.map((item) => (
-            <ImageListItem key={item.img}>
+            <ImageListItem key={item.imgPath}>
             <img
                 src={`${item.imgPath}?w=248&fit=crop&auto=format`}
                 srcSet={`${item.imgPath}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.label}
                 loading="lazy"
             />
+            <ImageListItemBar
+                title={`test`}
+                actionIcon={
+                <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    aria-label={`info about ${`test`}`}
+                >
+              </IconButton>
+            }
+          />
             </ImageListItem>
         ))}
     </ImageList>
