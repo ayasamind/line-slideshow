@@ -92,7 +92,6 @@ const SwipeableTextMobileStepper = () => {
 
   return (
     <FullScreen handle={handle}>
-        <p>{ message }</p>
         <Box sx={{ maxWidth: 'auto', flexGrow: 1 }}>
         <AutoPlaySwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
