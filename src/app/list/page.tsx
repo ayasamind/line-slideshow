@@ -28,14 +28,14 @@ const PhotoList = () => {
 
   if (images.length === 0) {
     s3images.forEach(image => {
-      // console.log(image)
-      if (image["key"].endsWith("photo")) {
+      let imageKey: string = image["key"];
+      if (imageKey.endsWith("photo")) {
         images.push({
           label: image["key"],
           imgPath: s3Url+image["key"],
         })
-      } else if (image["key"].endsWith("profile")) {
-        let key = image["key"].split('/');
+      } else if (imageKey.endsWith("profile")) {
+        let key = imageKey.split('/');
         let author = key[1].split('_')[0];
         profiles.push({
           label: author,
@@ -44,9 +44,7 @@ const PhotoList = () => {
       }
     });
   }
-
-  // console.log(profiles)
-
+  
   return (
     <ImageList
         sx={{ margin: '2px', minHeight: 300 }}
