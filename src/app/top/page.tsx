@@ -12,6 +12,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
+import './top.css'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -140,12 +141,16 @@ const SwipeableTextMobileStepper = () => {
                       display: 'block',
                       overflow: 'hidden',
                       width: 'auto',
-                      height: '1050px',
+                      height: '850px',
                       margin: 'auto', 
                     }}
                 />
                   <ImageListItemBar
                     title={profiles[step.label] ? profiles[step.label].label : ''}
+                    sx={{
+                      lineHeight: 'initial',
+                      fontSize: '2rem'
+                    }}
                     actionPosition='left'
                     actionIcon={
                     <IconButton
@@ -165,6 +170,7 @@ const SwipeableTextMobileStepper = () => {
           ))}
         </AutoPlaySwipeableViews>
         <MobileStepper
+            variant="progress"
             steps={maxSteps}
             position="static"
             activeStep={activeStep}
