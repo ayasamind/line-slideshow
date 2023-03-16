@@ -12,7 +12,6 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
-import './top.css'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -206,6 +205,16 @@ const SwipeableTextMobileStepper = () => {
             Full
         </Button>
         </Box>
+        <style>
+        {`
+          .css-dasnyc-MuiImageListItemBar-title {
+            font-size: 2rem;
+            text-overflow: ellipsis;
+            overflow: visible;
+            white-space: nowrap;
+          }
+        `}
+      </style>
     </FullScreen>
   );
 }
