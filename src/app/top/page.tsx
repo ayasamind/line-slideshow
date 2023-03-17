@@ -141,7 +141,7 @@ const SwipeableTextMobileStepper = () => {
                       display: 'block',
                       overflow: 'hidden',
                       width: 'auto',
-                      height: '850px',
+                      height: '1025px',
                       margin: 'auto', 
                     }}
                 />
